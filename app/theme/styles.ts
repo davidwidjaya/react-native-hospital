@@ -216,6 +216,9 @@ export const MainStyle = {
     bgcolor_primary_blue:{
         backgroundColor: "#2E6FDF"
     },
+    bgcolor_primary_blue_light:{
+        backgroundColor: "#F4F5FC"
+    },
 
     color_grey_light:{
         color: "#E8E8E8"

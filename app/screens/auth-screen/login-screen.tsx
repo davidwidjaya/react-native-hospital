@@ -186,7 +186,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
                     <View style={{ height: 0.096 * deviceWidth }} />
                     <Button_big
-                        onPress={() => Alert.alert('Hai')}
+                        onPress={() => props.navigation.navigate('home')}
                         text={'Masuk'}
                     />
                     <View style={{ height: 0.096 * deviceWidth }} />
