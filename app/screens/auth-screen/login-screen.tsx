@@ -21,55 +21,58 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     var [spinner, setSpinner] = useState(false);
     var [email, setEmail] = useState("");
-    var [password, setPassword] = useState("");
-    var [username, setUsername] = useState("");
+    var [password, setPassword] = useState("0101");
+    var [username, setUsername] = useState("pujivenus");
     var [remember, setRemember] = useState(false);
 
-    //   const routePage = async () => {
-    //     setSpinner(true);
+    const login = async () => {
+        setSpinner(true);
 
-    //     if(email == ""){
-    //       ToastAndroid.show("Email can't be empty.", ToastAndroid.LONG);
-    //     }
-    //     else if(password == ""){
-    //       ToastAndroid.show("Password can't be empty.", ToastAndroid.LONG);
-    //     }
-    //     else if(email == "admin" && password == "admin"){
-    //       props.navigation.replace("admin");
-    //     }
-    //     else{
-    //       let formData = new FormData();
+        if (username == "") {
+            ToastAndroid.show("Email can't be empty.", ToastAndroid.LONG);
+        }
+        else if (password == "") {
+            ToastAndroid.show("Password can't be empty.", ToastAndroid.LONG);
+        }
+        // else if(email == "admin" && password == "admin"){
+        //   props.navigation.replace("admin");
+        // }
+        else {
+            let formData = new FormData();
+            console.log('call api...');
+            formData.append("username", username);
+            formData.append("password", password);
+            formData.append("code", 'devmercury123');
 
-    //       formData.append("email", email);
-    //       formData.append("password", password);
+            console.log('formdata', formData);
 
-    //       var result = await rootStore.login(formData);
+            var result = await rootStore.login(formData);
+            console.log(result);
+            if (result.kind == "ok") {
+                var token = result.data.token;
+                global.bearer_token = token;
 
-    //       if (result.kind == "ok") {
-    //         var token = result.data.token;
-    //         global.bearer_token = token;
+                console.log("Token : " + global.bearer_token);
 
-    //         console.log("Token : "+global.bearer_token);
+                await AsyncStorage.setItem('bearer_token', token);
 
-    //         await AsyncStorage.setItem('bearer_token', token);
+                props.navigation.replace("home");
+            }
+            else if (result.kind == 'wrong') {
+                setSpinner(false);
+                Alert.alert(
+                    'Ooops...',
+                    result.message.toString(),
+                    [
+                        { text: 'OK', onPress: () => console.log('OK Pressed') }
+                    ],
+                    { cancelable: false }
+                );
+            }
+        }
 
-    //         props.navigation.replace("home");
-    //       }
-    //       else if (result.kind == 'wrong') {
-    //         setSpinner(false);
-    //         Alert.alert(
-    //           'Ooops...',
-    //           result.message.toString(),
-    //           [
-    //             { text: 'OK', onPress: () => console.log('OK Pressed') }
-    //           ],
-    //           { cancelable: false }
-    //         );
-    //       }
-    //     }
-
-    //     setSpinner(false);
-    //   }
+        setSpinner(false);
+    }
 
     useEffect(() => {
 
@@ -77,6 +80,11 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     return (
         <View style={{ ...Styles.container, alignItems: 'center' }}>
+
+            <Spinner
+                visible={spinner}
+            />
+
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Image
                     style={{
@@ -186,7 +194,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
                     <View style={{ height: 0.096 * deviceWidth }} />
                     <Button_big
-                        onPress={() => props.navigation.navigate('home')}
+                        onPress={() => login()}
                         text={'Masuk'}
                     />
                     <View style={{ height: 0.096 * deviceWidth }} />

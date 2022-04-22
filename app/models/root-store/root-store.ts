@@ -52,6 +52,32 @@ export const RootStoreModel = types.model("RootStore").props({
       }
       return res;
     },
+    async login(content) {
+      var res = await ApiInstance.login(content);
+      console.log(res);
+      if (res.kind == "ok") {
+      }
+      else if (res.kind == 'wrong') {
+        console.log(res.message);
+      }
+      else {
+        actionError(res, self);
+      }
+      return res;
+    },
+    async dashboard(content) {
+      var res = await ApiInstance.dashboard(content);
+      console.log('result apistore-dashboard: ',res);
+      if (res.kind == "ok") {
+      }
+      else if (res.kind == 'wrong') {
+        console.log(res.message);
+      }
+      else {
+        actionError(res, self);
+      }
+      return res;
+    },
   }))
 
 /**

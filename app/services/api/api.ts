@@ -51,7 +51,91 @@ export class Api {
    */
 
 
-   async getAllMenu(data): Promise<Types.GetDefaultResult> {
+  async login(data): Promise<Types.GetDefaultResult> {
+    this.apisauce.setHeader('Accept', 'application/json');
+    this.apisauce.setHeader('Content-Type', 'application/json');
+    // this.apisauce.setHeader('token', global.bearer_token);
+
+    let response: ApiResponse<any>;
+    let path = `/login`;
+    console.log('mask api.ts');
+    console.log(data);
+
+
+    if (data._parts.length == 0) {
+      response = await this.apisauce.post(path)
+    }
+    else {
+      response = await this.apisauce.post(path, data)
+    }
+    console.log('response..', response);
+
+    console.log('response.data.....', response.data);
+    if (response.data.status == "error") {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      if (response.data && response.data.status != "error") {
+        const result = response.data;
+      }
+      if (response.data.status == 200) {
+        const resultData: Types.AppDefault = response.data.data;
+        return { kind: "ok", data: resultData }
+      } else {
+        const resultData: Types.AppDefault = response.data.message;
+        return { kind: "wrong", message: resultData }
+      }
+
+    } catch {
+      return { kind: "bad-data", msg: response.data.message }
+    }
+  }
+  async dashboard(data): Promise<Types.GetDefaultResult> {
+    console.log('bearertokenglobal', global.bearer_token);
+    this.apisauce.setHeader('Accept', 'application/json');
+    this.apisauce.setHeader('Content-Type', 'application/json');
+    this.apisauce.setHeader('x-token', global.bearer_token);
+
+    let response: ApiResponse<any>;
+    let path = `/dashboard`;
+    console.log('mask api.ts');
+    console.log(data);
+
+
+    if (data._parts.length == 0) {
+      response = await this.apisauce.get(path)
+    }
+    else {
+      response = await this.apisauce.get(path, data)
+    }
+    console.log('response..', response);
+
+    console.log('response.data.....', response.data);
+    if (response.data.status == "error") {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      if (response.data && response.data.status != "error") {
+        const result = response.data;
+      }
+      if (response.data.status == 200) {
+        const resultData: Types.AppDefault = response.data;
+        return { kind: "ok", data: resultData }
+      } else {
+        const resultData: Types.AppDefault = response.data.message;
+        return { kind: "wrong", message: resultData }
+      }
+
+    } catch {
+      return { kind: "bad-data", msg: response.data.message }
+    }
+  }
+
+  async getAllMenu(data): Promise<Types.GetDefaultResult> {
     this.apisauce.setHeader('Accept', 'application/json');
     this.apisauce.setHeader('Content-Type', 'application/json');
     this.apisauce.setHeader('token', global.bearer_token);

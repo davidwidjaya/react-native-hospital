@@ -310,6 +310,7 @@ export const Styles = {
         // borderWidth: 1,
         // borderColor:MainStyle.color_grey_dark.color,
         borderRadius:12,
+        ...MainStyle.color_black,
         backgroundColor:MainStyle.color_blue_light.color,
         ...MainStyle.font_14
     },

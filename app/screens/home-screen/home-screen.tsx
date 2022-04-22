@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ParamListBase } from "@react-navigation/native"
+import { ParamListBase, useIsFocused } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "react-native-screens/native-stack"
 import { useStores } from "@models/root-store"
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -20,22 +20,75 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     const rootStore = useStores();
 
     var [spinner, setSpinner] = useState(false);
-    var [email, setEmail] = useState("");
-    var [password, setPassword] = useState("");
-    var [search, setSearch] = useState("");
 
-    const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' }
-    ]);
-    useEffect(() => {
+    const [orderLabo, setOrderLabo] = useState(0);
+    const [orderRadio, setOrderRadio] = useState(0);
+    const [visitDays, setVisitDays] = useState([]);
+    const [visitMonth, setVisitMonth] = useState([]);
+    const [summaryRegistration, setSummaryRegistration] = useState([]);
+    const [statusDurationService, setStatusDurationService] = useState(null);
 
+    const getDashboard = async () => {
+        setSpinner(true);
+
+        let formData = new FormData();
+
+        console.log(value);
+
+        var result = await rootStore.dashboard(formData);
+        if (result.kind == "ok") {
+            console.log('dashboard: ', result);
+            setOrderLabo(result.data.data.total_order_radiologi);
+            setOrderRadio(result.data.data.total_order_laboratorium);
+            setVisitDays(result.data.data.total_kunjungan_harian);
+            setVisitMonth(result.data.data.total_kunjungan_bulanan);
+            setSummaryRegistration(result.data.data.summary_registrasi);
+            console.log('xxxx',result.data.stats_indikator_mutu_durasi_pelayanan);
+            setStatusDurationService(result.data.stats_indikator_mutu_durasi_pelayanan);
+        }
+        else if (result.kind == 'wrong') {
+            // console.log(result);
+            setSpinner(false);
+            Alert.alert(
+                'Ooops...',
+                result.message.toString(),
+                [
+                    { text: 'OK', onPress: () => props.navigation.replace('login') }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        setSpinner(false);
+    }
+
+    const checkLogin = async () => {
+        var token = await AsyncStorage.getItem('bearer_token');
+
+        if (token !== null) {
+            global.bearer_token = token;
+            console.log(global.bearer_token);
+        } else {
+            props.navigation.replace('login');
+        }
+    }
+
+    useEffect(() => {
+        checkLogin();
     }, []);
+
+    useEffect(() => {
+        getDashboard();
+    }, [useIsFocused]);
 
     return (
         <View style={{ ...Styles.container, alignItems: 'center' }}>
+
+
+            <Spinner
+                visible={spinner}
+            />
 
             <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -59,7 +112,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                         marginLeft: 0.064 * deviceWidth,
                         marginTop: 0.0373 * deviceWidth
                     }}>
-                        Pasien & Kunjungan
+                        Pasien & Kunjungan Harian
                     </Text>
                     <View style={{ height: 0.0533 * deviceWidth }} />
 
@@ -85,7 +138,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {visitDays.total_pasien ? visitDays.total_pasien : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -123,7 +176,182 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {visitDays.pria ? visitDays.pria : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Pria
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {visitDays.wanita ? visitDays.wanita : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Wanita
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {visitDays.pasien_baru ? visitDays.pasien_baru : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Pasien Baru
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {visitDays.pasien_kontrol ? visitDays.pasien_kontrol : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Pasien Kontrol
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+
+
+                    </ScrollView>
+
+                </View>
+                <View>
+                    <Text style={{
+                        ...MainStyle.font_arial_16,
+                        ...MainStyle.color_black,
+                        fontWeight: '700',
+                        width: deviceWidth,
+                        marginLeft: 0.064 * deviceWidth,
+                        marginTop: 0.0373 * deviceWidth
+                    }}>
+                        Pasien & Kunjungan Bulanan
+                    </Text>
+                    <View style={{ height: 0.0533 * deviceWidth }} />
+
+                    <ScrollView showsVerticalScrollIndicator={false} horizontal={true} style={{
+                        marginLeft: 0.064 * deviceWidth,
+                        marginRight: 0.064 * deviceWidth,
+
+                    }}>
+
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {visitMonth.total_pasien ? visitMonth.total_pasien : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -161,7 +389,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                21
+                                {visitMonth.pria ? visitMonth.pria : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -170,7 +398,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Registrasi Aktif
+                                Pria
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -199,7 +427,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {visitMonth.wanita ? visitMonth.wanita : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -208,7 +436,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Total Kunjungan
+                                Wanita
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -237,7 +465,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {visitMonth.pasien_baru ? visitMonth.pasien_baru : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -246,7 +474,45 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Total Kunjungan
+                                Pasien Baru
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {visitMonth.pasien_kontrol ? visitMonth.pasien_kontrol : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Pasien Kontrol
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -298,7 +564,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                14
+                                {orderLabo}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -336,7 +602,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                44
+                                {orderRadio}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -374,7 +640,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                21
+                                {summaryRegistration.total_pending_rajal ? summaryRegistration.total_pending_rajal : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -383,7 +649,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Registrasi Aktif
+                                Pending Rajal
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -412,7 +678,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {summaryRegistration.total_aktif_rajal ? summaryRegistration.total_aktif_rajal : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -421,7 +687,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Total Kunjungan
+                                Total Aktif Rajal
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -450,7 +716,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 fontWeight: '700',
                                 textAlign: 'center'
                             }}>
-                                25
+                                {summaryRegistration.total_pending_ranap ? summaryRegistration.total_pending_ranap : 0}
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_14,
@@ -459,7 +725,44 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                 textAlign: 'center',
                                 marginTop: 0.0053 * deviceWidth
                             }}>
-                                Total Kunjungan
+                                Total Pending Ranap
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_12,
+                                ...MainStyle.color_grey_new,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.016 * deviceWidth,
+                            }}>
+                                2022-03-10
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{
+                            width: 0.408 * deviceWidth,
+                            height: 0.2773 * deviceWidth,
+                            ...MainStyle.bgcolor_primary_blue_light,
+                            borderRadius: 13,
+                            paddingHorizontal: 0.032 * deviceWidth,
+                            paddingVertical: 0.0426 * deviceWidth,
+                            marginRight: 0.0426 * deviceWidth,
+                        }}>
+
+                            <Text style={{
+                                ...MainStyle.font_arial_24,
+                                ...MainStyle.color_black,
+                                fontWeight: '700',
+                                textAlign: 'center'
+                            }}>
+                                {summaryRegistration.total_reg_aktif ? summaryRegistration.total_reg_aktif : 0}
+                            </Text>
+                            <Text style={{
+                                ...MainStyle.font_arial_14,
+                                ...MainStyle.color_black,
+                                fontWeight: '400',
+                                textAlign: 'center',
+                                marginTop: 0.0053 * deviceWidth
+                            }}>
+                                Total Regis Aktif
                             </Text>
                             <Text style={{
                                 ...MainStyle.font_arial_12,
@@ -489,192 +792,107 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                         Durasi
                     </Text>
 
-                    <View style={{ height: 0.0533 * deviceWidth }} />
-                    <TouchableOpacity style={{
-                        width: 0.872 * deviceWidth,
-                        height: 0.416 * deviceWidth,
-                        ...MainStyle.bgcolor_primary_blue_light,
-                        borderRadius: 13,
-                        paddingHorizontal: 0.032 * deviceWidth,
-                        paddingVertical: 0.0426 * deviceWidth,
-                        marginRight: 0.0426 * deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginBottom: 0.0426 * deviceWidth,
+                    {/* {
+                        statusDurationService !== undefined && statusDurationService !== null ? statusDurationService.map((item, idx) => {
+                            return (
+                                <View key={idx}>
+                                    <TouchableOpacity style={{
+                                        width: 0.872 * deviceWidth,
+                                        height: 0.416 * deviceWidth,
+                                        ...MainStyle.bgcolor_primary_blue_light,
+                                        borderRadius: 13,
+                                        paddingHorizontal: 0.032 * deviceWidth,
+                                        paddingVertical: 0.0426 * deviceWidth,
+                                        marginRight: 0.0426 * deviceWidth,
+                                        marginLeft: 0.064 * deviceWidth,
+                                        marginBottom: 0.0426 * deviceWidth,
 
-                    }}>
+                                    }}>
 
-                        <Text style={{
-                            ...MainStyle.font_arial_24,
-                            ...MainStyle.color_black,
-                            fontWeight: '700',
-                            textAlign: 'center'
-                        }}>
-                            1 menit 15 detik
-                        </Text>
-                        <Text style={{
-                            ...MainStyle.font_arial_14,
-                            ...MainStyle.color_black,
-                            fontWeight: '400',
-                            textAlign: 'center',
-                            marginTop: 0.0053 * deviceWidth
-                        }}>
-                            Durasi rata-rata tunggu di CS
-                        </Text>
-                        <Text style={{
-                            ...MainStyle.font_arial_12,
-                            ...MainStyle.color_grey_new,
-                            fontWeight: '400',
-                            textAlign: 'center',
-                            marginTop: 0.016 * deviceWidth,
-                        }}>
-                            2022-03-10
-                        </Text>
+                                        <Text style={{
+                                            ...MainStyle.font_arial_24,
+                                            ...MainStyle.color_black,
+                                            fontWeight: '700',
+                                            textAlign: 'center'
+                                        }}>
+                                            1 menit 15 detik
+                                        </Text>
+                                        <Text style={{
+                                            ...MainStyle.font_arial_14,
+                                            ...MainStyle.color_black,
+                                            fontWeight: '400',
+                                            textAlign: 'center',
+                                            marginTop: 0.0053 * deviceWidth
+                                        }}>
+                                            Durasi rata-rata tunggu di CS
+                                        </Text>
+                                        <Text style={{
+                                            ...MainStyle.font_arial_12,
+                                            ...MainStyle.color_grey_new,
+                                            fontWeight: '400',
+                                            textAlign: 'center',
+                                            marginTop: 0.016 * deviceWidth,
+                                        }}>
+                                            2022-03-10
+                                        </Text>
 
-                        <View style={{
-                            flexDirection: "row"
-                        }}>
-                            <View style={{
-                                width: 0.21333 * deviceWidth
-                            }}>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    Total Durasi
-                                </Text>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    Total Pasien
-                                </Text>
+                                        <View style={{
+                                            flexDirection: "row"
+                                        }}>
+                                            <View style={{
+                                                width: 0.24333 * deviceWidth
+                                            }}>
+                                                <Text style={{
+                                                    ...MainStyle.font_arial_14,
+                                                    ...MainStyle.color_black,
+                                                    fontWeight: '400',
+                                                    textAlign: 'center',
+                                                    marginTop: 0.0053 * deviceWidth
+                                                }}>
+                                                    Total Durasi
+                                                </Text>
+                                                <Text style={{
+                                                    ...MainStyle.font_arial_14,
+                                                    ...MainStyle.color_black,
+                                                    fontWeight: '400',
+                                                    textAlign: 'center',
+                                                    marginTop: 0.0053 * deviceWidth
+                                                }}>
+                                                    Total Pasien
+                                                </Text>
 
-                            </View>
-                            <View style={{
-                                width: 0.576 * deviceWidth,
-                                alignItems: 'flex-end'
-                            }}>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    17 menit 30 detik
-                                </Text>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    14
-                                </Text>
-                            </View>
+                                            </View>
+                                            <View style={{
+                                                width: 0.566 * deviceWidth,
+                                                alignItems: 'flex-end'
+                                            }}>
+                                                <Text style={{
+                                                    ...MainStyle.font_arial_14,
+                                                    ...MainStyle.color_black,
+                                                    fontWeight: '400',
+                                                    textAlign: 'center',
+                                                    marginTop: 0.0053 * deviceWidth
+                                                }}>
+                                                    17 menit 30 detik
+                                                </Text>
+                                                <Text style={{
+                                                    ...MainStyle.font_arial_14,
+                                                    ...MainStyle.color_black,
+                                                    fontWeight: '400',
+                                                    textAlign: 'center',
+                                                    marginTop: 0.0053 * deviceWidth
+                                                }}>
+                                                    14
+                                                </Text>
+                                            </View>
 
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{
-                        width: 0.872 * deviceWidth,
-                        height: 0.416 * deviceWidth,
-                        ...MainStyle.bgcolor_primary_blue_light,
-                        borderRadius: 13,
-                        paddingHorizontal: 0.032 * deviceWidth,
-                        paddingVertical: 0.0426 * deviceWidth,
-                        marginRight: 0.0426 * deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginBottom: 0.0426 * deviceWidth,
-
-                    }}>
-
-                        <Text style={{
-                            ...MainStyle.font_arial_24,
-                            ...MainStyle.color_black,
-                            fontWeight: '700',
-                            textAlign: 'center'
-                        }}>
-                            1 menit 15 detik
-                        </Text>
-                        <Text style={{
-                            ...MainStyle.font_arial_14,
-                            ...MainStyle.color_black,
-                            fontWeight: '400',
-                            textAlign: 'center',
-                            marginTop: 0.0053 * deviceWidth
-                        }}>
-                            Durasi rata-rata tunggu di CS
-                        </Text>
-                        <Text style={{
-                            ...MainStyle.font_arial_12,
-                            ...MainStyle.color_grey_new,
-                            fontWeight: '400',
-                            textAlign: 'center',
-                            marginTop: 0.016 * deviceWidth,
-                        }}>
-                            2022-03-10
-                        </Text>
-
-                        <View style={{
-                            flexDirection: "row"
-                        }}>
-                            <View style={{
-                                width: 0.21333 * deviceWidth
-                            }}>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    Total Durasi
-                                </Text>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    Total Pasien
-                                </Text>
-
-                            </View>
-                            <View style={{
-                                width: 0.576 * deviceWidth,
-                                alignItems: 'flex-end'
-                            }}>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    17 menit 30 detik
-                                </Text>
-                                <Text style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'center',
-                                    marginTop: 0.0053 * deviceWidth
-                                }}>
-                                    14
-                                </Text>
-                            </View>
-
-                        </View>
-                    </TouchableOpacity>
-
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        })
+                            : <View></View>
+                    } */}
                 </View>
 
             </ScrollView>
