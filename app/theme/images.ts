@@ -8,6 +8,7 @@ export const Images = {
     //image
     login_image : require("../../assets/images/login-image.jpg"),
     login_img : require("../../assets/images/login-img.png"),
+    hamburger_icon : require("../../assets/images/hamburger-icon.png"),
 
     //gif
     loading_gif : require("../../assets/gif/loading-gif.gif"),

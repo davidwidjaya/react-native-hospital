@@ -44,8 +44,9 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
             setVisitDays(result.data.data.total_kunjungan_harian);
             setVisitMonth(result.data.data.total_kunjungan_bulanan);
             setSummaryRegistration(result.data.data.summary_registrasi);
-            console.log('xxxx',result.data.stats_indikator_mutu_durasi_pelayanan);
+            console.log('xxxx', result.data.stats_indikator_mutu_durasi_pelayanan);
             setStatusDurationService(result.data.stats_indikator_mutu_durasi_pelayanan);
+
         }
         else if (result.kind == 'wrong') {
             // console.log(result);
@@ -92,6 +93,29 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
 
+                <View style={{
+                    // backgroundColor: 'red',
+                    flexDirection: "row",
+                    marginTop: 0.14666 * deviceWidth,
+                    alignItems: "flex-end",
+                    width: deviceWidth,
+                    justifyContent: 'flex-end',
+                    paddingRight: 0.0746*deviceWidth
+                }}>
+                    <TouchableOpacity
+                        onPress={() => props.navigation.replace('login')}
+                        style={{
+                            width: 0.0826 * deviceWidth,
+                            height: 0.0966 * deviceWidth,
+                            // backgroundColor: 'red',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Image source={Images.hamburger_icon} />
+                    </TouchableOpacity>
+
+                </View>
                 <Text style={{
                     ...MainStyle.font_arial_24,
                     ...MainStyle.color_black,
@@ -792,107 +816,576 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                         Durasi
                     </Text>
 
-                    {/* {
-                        statusDurationService !== undefined && statusDurationService !== null ? statusDurationService.map((item, idx) => {
-                            return (
-                                <View key={idx}>
-                                    <TouchableOpacity style={{
-                                        width: 0.872 * deviceWidth,
-                                        height: 0.416 * deviceWidth,
-                                        ...MainStyle.bgcolor_primary_blue_light,
-                                        borderRadius: 13,
-                                        paddingHorizontal: 0.032 * deviceWidth,
-                                        paddingVertical: 0.0426 * deviceWidth,
-                                        marginRight: 0.0426 * deviceWidth,
-                                        marginLeft: 0.064 * deviceWidth,
-                                        marginBottom: 0.0426 * deviceWidth,
+                    {
+                        (statusDurationService !== undefined && statusDurationService !== null) ?
+                            <View>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
 
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
                                     }}>
+                                        {statusDurationService.tunggu_di_cs.rata2 ? statusDurationService.tunggu_di_cs.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata tunggu di CS
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
 
-                                        <Text style={{
-                                            ...MainStyle.font_arial_24,
-                                            ...MainStyle.color_black,
-                                            fontWeight: '700',
-                                            textAlign: 'center'
-                                        }}>
-                                            1 menit 15 detik
-                                        </Text>
-                                        <Text style={{
-                                            ...MainStyle.font_arial_14,
-                                            ...MainStyle.color_black,
-                                            fontWeight: '400',
-                                            textAlign: 'center',
-                                            marginTop: 0.0053 * deviceWidth
-                                        }}>
-                                            Durasi rata-rata tunggu di CS
-                                        </Text>
-                                        <Text style={{
-                                            ...MainStyle.font_arial_12,
-                                            ...MainStyle.color_grey_new,
-                                            fontWeight: '400',
-                                            textAlign: 'center',
-                                            marginTop: 0.016 * deviceWidth,
-                                        }}>
-                                            2022-03-10
-                                        </Text>
-
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
                                         <View style={{
-                                            flexDirection: "row"
+                                            width: 0.24333 * deviceWidth
                                         }}>
-                                            <View style={{
-                                                width: 0.24333 * deviceWidth
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
                                             }}>
-                                                <Text style={{
-                                                    ...MainStyle.font_arial_14,
-                                                    ...MainStyle.color_black,
-                                                    fontWeight: '400',
-                                                    textAlign: 'center',
-                                                    marginTop: 0.0053 * deviceWidth
-                                                }}>
-                                                    Total Durasi
-                                                </Text>
-                                                <Text style={{
-                                                    ...MainStyle.font_arial_14,
-                                                    ...MainStyle.color_black,
-                                                    fontWeight: '400',
-                                                    textAlign: 'center',
-                                                    marginTop: 0.0053 * deviceWidth
-                                                }}>
-                                                    Total Pasien
-                                                </Text>
-
-                                            </View>
-                                            <View style={{
-                                                width: 0.566 * deviceWidth,
-                                                alignItems: 'flex-end'
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
                                             }}>
-                                                <Text style={{
-                                                    ...MainStyle.font_arial_14,
-                                                    ...MainStyle.color_black,
-                                                    fontWeight: '400',
-                                                    textAlign: 'center',
-                                                    marginTop: 0.0053 * deviceWidth
-                                                }}>
-                                                    17 menit 30 detik
-                                                </Text>
-                                                <Text style={{
-                                                    ...MainStyle.font_arial_14,
-                                                    ...MainStyle.color_black,
-                                                    fontWeight: '400',
-                                                    textAlign: 'center',
-                                                    marginTop: 0.0053 * deviceWidth
-                                                }}>
-                                                    14
-                                                </Text>
-                                            </View>
+                                                Total Pasien
+                                            </Text>
 
                                         </View>
-                                    </TouchableOpacity>
-                                </View>
-                            )
-                        })
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_di_cs.jumlah_durasi ? statusDurationService.tunggu_di_cs.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_di_cs.jumlah_pasien ? statusDurationService.tunggu_di_cs.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
+
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
+                                    }}>
+                                        {statusDurationService.pelayanan_di_cs.rata2 ? statusDurationService.pelayanan_di_cs.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata pelayanan di CS
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
+
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
+                                        <View style={{
+                                            width: 0.24333 * deviceWidth
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Pasien
+                                            </Text>
+
+                                        </View>
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pelayanan_di_cs.jumlah_durasi ? statusDurationService.pelayanan_di_cs.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pelayanan_di_cs.jumlah_pasien ? statusDurationService.pelayanan_di_cs.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
+
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
+                                    }}>
+                                        {statusDurationService.tunggu_di_poli.rata2 ? statusDurationService.tunggu_di_poli.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata tunggu di Poli
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
+
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
+                                        <View style={{
+                                            width: 0.24333 * deviceWidth
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Pasien
+                                            </Text>
+
+                                        </View>
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_di_poli.jumlah_durasi ? statusDurationService.tunggu_di_poli.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_di_poli.jumlah_pasien ? statusDurationService.tunggu_di_poli.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
+
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
+                                    }}>
+                                        {statusDurationService.pelayanan_di_poli.rata2 ? statusDurationService.pelayanan_di_poli.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata pelayanan di Poli
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
+
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
+                                        <View style={{
+                                            width: 0.24333 * deviceWidth
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Pasien
+                                            </Text>
+
+                                        </View>
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pelayanan_di_poli.jumlah_durasi ? statusDurationService.pelayanan_di_poli.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pelayanan_di_poli.jumlah_pasien ? statusDurationService.pelayanan_di_poli.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
+
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
+                                    }}>
+                                        {statusDurationService.tunggu_resep.rata2 ? statusDurationService.tunggu_resep.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata tunggu resep
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
+
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
+                                        <View style={{
+                                            width: 0.24333 * deviceWidth
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Pasien
+                                            </Text>
+
+                                        </View>
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_resep.jumlah_durasi ? statusDurationService.tunggu_resep.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.tunggu_resep.jumlah_pasien ? statusDurationService.tunggu_resep.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    width: 0.872 * deviceWidth,
+                                    height: 0.416 * deviceWidth,
+                                    ...MainStyle.bgcolor_primary_blue_light,
+                                    borderRadius: 13,
+                                    paddingHorizontal: 0.032 * deviceWidth,
+                                    paddingVertical: 0.0426 * deviceWidth,
+                                    marginRight: 0.0426 * deviceWidth,
+                                    marginLeft: 0.064 * deviceWidth,
+                                    marginBottom: 0.0426 * deviceWidth,
+
+                                }}>
+
+                                    <Text style={{
+                                        ...MainStyle.font_arial_24,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '700',
+                                        textAlign: 'center'
+                                    }}>
+                                        {statusDurationService.pembuatan_resep.rata2 ? statusDurationService.pembuatan_resep.rata2 : 0}
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_14,
+                                        ...MainStyle.color_black,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.0053 * deviceWidth
+                                    }}>
+                                        Durasi rata-rata pembuatan resep
+                                    </Text>
+                                    <Text style={{
+                                        ...MainStyle.font_arial_12,
+                                        ...MainStyle.color_grey_new,
+                                        fontWeight: '400',
+                                        textAlign: 'center',
+                                        marginTop: 0.016 * deviceWidth,
+                                    }}>
+                                        2022-03-10
+                                    </Text>
+
+                                    <View style={{
+                                        flexDirection: "row"
+                                    }}>
+                                        <View style={{
+                                            width: 0.24333 * deviceWidth
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Durasi
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                Total Pasien
+                                            </Text>
+
+                                        </View>
+                                        <View style={{
+                                            width: 0.566 * deviceWidth,
+                                            alignItems: 'flex-end'
+                                        }}>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pembuatan_resep.jumlah_durasi ? statusDurationService.pembuatan_resep.jumlah_durasi : 0}
+
+                                            </Text>
+                                            <Text style={{
+                                                ...MainStyle.font_arial_14,
+                                                ...MainStyle.color_black,
+                                                fontWeight: '400',
+                                                textAlign: 'center',
+                                                marginTop: 0.0053 * deviceWidth
+                                            }}>
+                                                {statusDurationService.pembuatan_resep.jumlah_pasien ? statusDurationService.pembuatan_resep.jumlah_pasien : 0}
+
+                                            </Text>
+                                        </View>
+
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
                             : <View></View>
-                    } */}
+                    }
                 </View>
 
             </ScrollView>

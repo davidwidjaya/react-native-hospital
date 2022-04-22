@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ParamListBase } from "@react-navigation/native"
+import { ParamListBase, useIsFocused } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "react-native-screens/native-stack"
 import { useStores } from "@models/root-store"
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -9,6 +9,10 @@ import { Textbox, Button_big } from "@components"
 import { Dimensions, View, Text, ToastAndroid, ScrollView, AsyncStorage, Alert, Image, TextInput, TouchableOpacity } from "react-native"
 import { values } from 'mobx';
 import CheckBox from '@react-native-community/checkbox';
+import SelectDropdown from 'react-native-select-dropdown'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons"
+
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -24,6 +28,8 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
     var [password, setPassword] = useState("0101");
     var [username, setUsername] = useState("pujivenus");
     var [remember, setRemember] = useState(false);
+    var [listFask, setListFask] = useState([]);
+    var [selectedFask, setSelectedFask] = useState("");
 
     const login = async () => {
         setSpinner(true);
@@ -42,7 +48,8 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
             console.log('call api...');
             formData.append("username", username);
             formData.append("password", password);
-            formData.append("code", 'devmercury123');
+            formData.append("code", selectedFask);
+            // formData.append("code", 'devmercury123');
 
             console.log('formdata', formData);
 
@@ -73,10 +80,41 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
         setSpinner(false);
     }
+    const listFaskes = async () => {
+        setSpinner(true);
+        let formData = new FormData();
+        console.log('call api fakses...');
+        // formData.append("consumer_id", "reactnativ");
+        // formData.append("consumer_secret", "1234qwer%232");
+        // formData.append("nama_consumer", "mobileapp");
+
+        console.log('formdata', formData);
+
+        var result = await rootStore.listFaskes(formData);
+        console.log('apiListFaskes', result);
+        if (result.kind == "ok") {
+            console.log('apiListFaskes', result.data);
+            // setListFask(result.data);
+            setListFask([{ "title": "devmercury123", "name": "DEV 4 RS MERCURY", "prefix": "dev_mercury" }, { "title": "Png5ud6DRf", "name": "DEV 4 RS VENUS", "prefix": "dev_venus" }]);
+        }
+        else if (result.kind == 'wrong') {
+            setSpinner(false);
+            Alert.alert(
+                'Ooops...',
+                result.message.toString(),
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        setSpinner(false);
+    }
 
     useEffect(() => {
-
-    }, []);
+        listFaskes();
+    }, [useIsFocused]);
 
     return (
         <View style={{ ...Styles.container, alignItems: 'center' }}>
@@ -124,6 +162,49 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                     }}>
                         Halo, selamat datang kembali
                     </Text>
+
+
+                    <SelectDropdown
+                        data={listFask}
+                        onSelect={(selectedItem, index) => {
+                            console.log(selectedItem, index);
+                            setSelectedFask(selectedItem.title);
+                        }}
+                        defaultButtonText={'Select country'}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem.title;
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            return item.title;
+                        }}
+                        buttonStyle={{
+                            width: 0.872 * deviceWidth,
+                            marginLeft: 0.064 * deviceWidth,
+                            marginRight: 0.064 * deviceWidth,
+                            marginTop: 0.042 * deviceWidth,
+                            ...Styles.textbox,
+                            padding: 0.02 * deviceWidth,
+                        }}
+                        buttonTextStyle={{
+                            textAlign: 'left',
+                            ...MainStyle.color_black,
+                            ...MainStyle.font_14,
+
+                        }}
+                        renderDropdownIcon={isOpened => {
+                            return <FontAwesomeIcon
+                                style={{ ...Styles.size_20, color: '#444' }}
+                                icon={isOpened ? faChevronUp : faChevronDown} />
+                        }}
+                        dropdownIconPosition={'right'}
+                        dropdownStyle={{
+                            backgroundColor: '#EFEFEF'
+                        }}
+                        rowStyle={{
+                            backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'
+                        }}
+                        rowTextStyle={{ color: '#444', textAlign: 'left' }}
+                    />
 
                     <Textbox
                         // width={deviceWidth}
@@ -204,4 +285,5 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
         </View>
     )
-}
+};
+

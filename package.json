@@ -61,6 +61,7 @@
     "react-native-loading-spinner-overlay": "^1.1.0",
     "react-native-safe-area-context": "3.1.8",
     "react-native-screens": "3.8.0",
+    "react-native-select-dropdown": "^1.13.0",
     "react-native-svg": "^12.1.1",
     "reactotron-mst": "3.1.4",
     "reactotron-react-js": "^3.3.7",

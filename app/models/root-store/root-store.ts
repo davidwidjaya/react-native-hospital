@@ -39,19 +39,6 @@ export const RootStoreModel = types.model("RootStore").props({
 
   .views(self => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions(self => ({
-    async getAllMenu(content) {
-      var res = await ApiInstance.getAllMenu(content);
-
-      if (res.kind == "ok") {
-      }
-      else if (res.kind == 'wrong') {
-        console.log(res.message);
-      }
-      else {
-        actionError(res, self);
-      }
-      return res;
-    },
     async login(content) {
       var res = await ApiInstance.login(content);
       console.log(res);
@@ -68,6 +55,19 @@ export const RootStoreModel = types.model("RootStore").props({
     async dashboard(content) {
       var res = await ApiInstance.dashboard(content);
       console.log('result apistore-dashboard: ',res);
+      if (res.kind == "ok") {
+      }
+      else if (res.kind == 'wrong') {
+        console.log(res.message);
+      }
+      else {
+        actionError(res, self);
+      }
+      return res;
+    },
+    async listFaskes(content) {
+      var res = await ApiInstance.listFaskes(content);
+      console.log('result apistore-listFaskes: ',res);
       if (res.kind == "ok") {
       }
       else if (res.kind == 'wrong') {

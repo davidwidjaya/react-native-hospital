@@ -134,22 +134,27 @@ export class Api {
       return { kind: "bad-data", msg: response.data.message }
     }
   }
-
-  async getAllMenu(data): Promise<Types.GetDefaultResult> {
+  async listFaskes(data): Promise<Types.GetDefaultResult> {
+    console.log('bearertokenglobal', global.bearer_token);
     this.apisauce.setHeader('Accept', 'application/json');
     this.apisauce.setHeader('Content-Type', 'application/json');
-    this.apisauce.setHeader('token', global.bearer_token);
+    this.apisauce.setHeader('x-token', global.bearer_token);
 
     let response: ApiResponse<any>;
-    let path = `/menu`;
+    let path = `/login/list_rs?consumer_id=reactnativ&consumer_secret=1234qwer%232&nama_consumer=mobileapp#2&nama_consumer=mobileapp`;
+    console.log('mask api.ts');
+    console.log(data);
+
 
     if (data._parts.length == 0) {
-      response = await this.apisauce.post(path)
+      response = await this.apisauce.get(path)
     }
     else {
-      response = await this.apisauce.post(path, data)
+      response = await this.apisauce.get(path, data)
     }
+    console.log('response..', response);
 
+    console.log('response.data.....', response.data);
     if (response.data.status == "error") {
       const problem = getGeneralApiProblem(response)
       if (problem) return problem
@@ -159,7 +164,7 @@ export class Api {
       if (response.data && response.data.status != "error") {
         const result = response.data;
       }
-      if (response.data.status == 'success') {
+      if (response.data.status == 200) {
         const resultData: Types.AppDefault = response.data.data;
         return { kind: "ok", data: resultData }
       } else {
