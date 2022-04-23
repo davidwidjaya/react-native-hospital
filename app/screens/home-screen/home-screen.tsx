@@ -68,7 +68,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 'Ooops...',
                 result.message.toString(),
                 [
-                    { text: 'OK', onPress: () => props.navigation.replace('login') }
+                    { text: 'OK', onPress: () => props.navigation.replace('primaryStack', { screen: 'login' }) }
                 ],
                 { cancelable: false }
             );
@@ -84,7 +84,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
             global.bearer_token = token;
             console.log(global.bearer_token);
         } else {
-            props.navigation.replace('login');
+            props.navigation.replace('primaryStack', { screen: 'login' });
         }
     }
 
