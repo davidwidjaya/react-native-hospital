@@ -62,7 +62,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
         }
         else if (result.kind == 'wrong') {
-            // console.log(result);
             setSpinner(false);
             Alert.alert(
                 'Ooops...',
@@ -114,7 +113,6 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
             >
 
                 <View style={{
-                    // backgroundColor: 'red',
                     flexDirection: "row",
                     marginTop: 0.14666 * deviceWidth,
                     alignItems: "flex-end",
@@ -124,11 +122,9 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 }}>
                     <TouchableOpacity
                         onPress={() => open()}
-                        // onPress={() => props.navigation.replace('login')}
                         style={{
                             width: 0.0826 * deviceWidth,
                             height: 0.0966 * deviceWidth,
-                            // backgroundColor: 'red',
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}
@@ -138,24 +134,14 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
                 </View>
                 <Text style={{
-                    ...MainStyle.font_arial_24,
-                    ...MainStyle.color_black,
-                    fontWeight: '700',
-                    width: deviceWidth,
-                    marginLeft: 0.064 * deviceWidth,
-                    marginTop: 0.0373 * deviceWidth
+                    ...Styles.dashboard_header_title
                 }}>
                     Dashboard
                 </Text>
 
                 <View>
                     <Text style={{
-                        ...MainStyle.font_arial_16,
-                        ...MainStyle.color_black,
-                        fontWeight: '700',
-                        width: deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginTop: 0.0373 * deviceWidth
+                        ...Styles.dashboard_subheader_title
                     }}>
                         Pasien & Kunjungan Harian
                     </Text>
@@ -168,190 +154,108 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                     }}>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitDays.total_pasien ? visitDays.total_pasien : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
                             }}>
                                 Total Kunjungan
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
+
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitDays.pria ? visitDays.pria : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
                             }}>
                                 Pria
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitDays.wanita ? visitDays.wanita : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
                             }}>
                                 Wanita
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitDays.pasien_baru ? visitDays.pasien_baru : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pasien Baru
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitDays.pasien_kontrol ? visitDays.pasien_kontrol : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pasien Kontrol
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
@@ -363,12 +267,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 </View>
                 <View>
                     <Text style={{
-                        ...MainStyle.font_arial_16,
-                        ...MainStyle.color_black,
-                        fontWeight: '700',
-                        width: deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginTop: 0.0373 * deviceWidth
+                        ...Styles.dashboard_subheader_title
                     }}>
                         Pasien & Kunjungan Bulanan
                     </Text>
@@ -381,190 +280,110 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                     }}>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitMonth.total_pasien ? visitMonth.total_pasien : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Total Kunjungan
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitMonth.pria ? visitMonth.pria : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pria
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitMonth.wanita ? visitMonth.wanita : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Wanita
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitMonth.pasien_baru ? visitMonth.pasien_baru : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pasien Baru
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {visitMonth.pasien_kontrol ? visitMonth.pasien_kontrol : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pasien Kontrol
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
@@ -576,12 +395,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 </View>
                 <View>
                     <Text style={{
-                        ...MainStyle.font_arial_16,
-                        ...MainStyle.color_black,
-                        fontWeight: '700',
-                        width: deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginTop: 0.0373 * deviceWidth
+                        ...Styles.dashboard_subheader_title
                     }}>
                         Transaksi
                     </Text>
@@ -594,227 +408,131 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                     }}>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {orderLabo}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Order Laboratorium
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {orderRadio}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Order Radiologi
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {summaryRegistration.total_pending_rajal ? summaryRegistration.total_pending_rajal : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Pending Rajal
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {summaryRegistration.total_aktif_rajal ? summaryRegistration.total_aktif_rajal : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Total Aktif Rajal
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {summaryRegistration.total_pending_ranap ? summaryRegistration.total_pending_ranap : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Total Pending Ranap
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{
-                            width: 0.408 * deviceWidth,
-                            height: 0.2773 * deviceWidth,
-                            ...MainStyle.bgcolor_primary_blue_light,
-                            borderRadius: 13,
-                            paddingHorizontal: 0.032 * deviceWidth,
-                            paddingVertical: 0.0426 * deviceWidth,
-                            marginRight: 0.0426 * deviceWidth,
+                            ...Styles.dashboard_item_wrapper
                         }}>
 
                             <Text style={{
-                                ...MainStyle.font_arial_24,
-                                ...MainStyle.color_black,
-                                fontWeight: '700',
-                                textAlign: 'center'
+                                ...Styles.dashboard_itemcount_text
                             }}>
                                 {summaryRegistration.total_reg_aktif ? summaryRegistration.total_reg_aktif : 0}
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.0053 * deviceWidth
+                                ...Styles.dashboard_item_desc_text
+
                             }}>
                                 Total Regis Aktif
                             </Text>
                             <Text style={{
-                                ...MainStyle.font_arial_12,
-                                ...MainStyle.color_grey_new,
-                                fontWeight: '400',
-                                textAlign: 'center',
-                                marginTop: 0.016 * deviceWidth,
+                                ...Styles.dashboard_item_date_text
                             }}>
                                 2022-03-10
                             </Text>
@@ -827,55 +545,32 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
                 <View>
                     <Text style={{
-                        ...MainStyle.font_arial_16,
-                        ...MainStyle.color_black,
-                        fontWeight: '700',
-                        width: deviceWidth,
-                        marginLeft: 0.064 * deviceWidth,
-                        marginTop: 0.0373 * deviceWidth
+                        ...Styles.dashboard_subheader_title
                     }}>
                         Durasi
                     </Text>
+                    <View style={{ height: 0.0533 * deviceWidth }} />
 
                     {
                         (statusDurationService !== undefined && statusDurationService !== null) ?
                             <View>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
+
                                     }}>
                                         {statusDurationService.tunggu_di_cs.rata2 ? statusDurationService.tunggu_di_cs.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata tunggu di CS
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_12,
-                                        ...MainStyle.color_grey_new,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.016 * deviceWidth,
+                                        ...Styles.dashboard_item_date_text
                                     }}>
                                         2022-03-10
                                     </Text>
@@ -887,20 +582,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -911,21 +598,14 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
+
                                             }}>
                                                 {statusDurationService.tunggu_di_cs.jumlah_durasi ? statusDurationService.tunggu_di_cs.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.tunggu_di_cs.jumlah_pasien ? statusDurationService.tunggu_di_cs.jumlah_pasien : 0}
 
@@ -935,32 +615,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
                                     }}>
                                         {statusDurationService.pelayanan_di_cs.rata2 ? statusDurationService.pelayanan_di_cs.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata pelayanan di CS
                                     </Text>
@@ -981,20 +645,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -1005,21 +661,13 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pelayanan_di_cs.jumlah_durasi ? statusDurationService.pelayanan_di_cs.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pelayanan_di_cs.jumlah_pasien ? statusDurationService.pelayanan_di_cs.jumlah_pasien : 0}
 
@@ -1029,32 +677,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
                                     }}>
                                         {statusDurationService.tunggu_di_poli.rata2 ? statusDurationService.tunggu_di_poli.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata tunggu di Poli
                                     </Text>
@@ -1075,20 +707,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -1099,21 +723,13 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.tunggu_di_poli.jumlah_durasi ? statusDurationService.tunggu_di_poli.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.tunggu_di_poli.jumlah_pasien ? statusDurationService.tunggu_di_poli.jumlah_pasien : 0}
 
@@ -1123,32 +739,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
                                     }}>
                                         {statusDurationService.pelayanan_di_poli.rata2 ? statusDurationService.pelayanan_di_poli.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata pelayanan di Poli
                                     </Text>
@@ -1169,20 +769,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -1193,21 +785,13 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pelayanan_di_poli.jumlah_durasi ? statusDurationService.pelayanan_di_poli.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pelayanan_di_poli.jumlah_pasien ? statusDurationService.pelayanan_di_poli.jumlah_pasien : 0}
 
@@ -1217,32 +801,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
                                     }}>
                                         {statusDurationService.tunggu_resep.rata2 ? statusDurationService.tunggu_resep.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata tunggu resep
                                     </Text>
@@ -1263,20 +831,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -1287,21 +847,14 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.tunggu_resep.jumlah_durasi ? statusDurationService.tunggu_resep.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
                                                 ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.tunggu_resep.jumlah_pasien ? statusDurationService.tunggu_resep.jumlah_pasien : 0}
 
@@ -1311,32 +864,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{
-                                    width: 0.872 * deviceWidth,
-                                    height: 0.416 * deviceWidth,
-                                    ...MainStyle.bgcolor_primary_blue_light,
-                                    borderRadius: 13,
-                                    paddingHorizontal: 0.032 * deviceWidth,
-                                    paddingVertical: 0.0426 * deviceWidth,
-                                    marginRight: 0.0426 * deviceWidth,
-                                    marginLeft: 0.064 * deviceWidth,
-                                    marginBottom: 0.0426 * deviceWidth,
-
+                                    ...Styles.dashboard_duration_wrapper_text
                                 }}>
 
                                     <Text style={{
-                                        ...MainStyle.font_arial_24,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '700',
-                                        textAlign: 'center'
+                                        ...Styles.dashboard_duration_average_text
                                     }}>
                                         {statusDurationService.pembuatan_resep.rata2 ? statusDurationService.pembuatan_resep.rata2 : 0}
                                     </Text>
                                     <Text style={{
-                                        ...MainStyle.font_arial_14,
-                                        ...MainStyle.color_black,
-                                        fontWeight: '400',
-                                        textAlign: 'center',
-                                        marginTop: 0.0053 * deviceWidth
+                                        ...Styles.dashboard_duration_desc_text
                                     }}>
                                         Durasi rata-rata pembuatan resep
                                     </Text>
@@ -1357,20 +894,12 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             width: 0.24333 * deviceWidth
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Durasi
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 Total Pasien
                                             </Text>
@@ -1381,21 +910,13 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                                             alignItems: 'flex-end'
                                         }}>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pembuatan_resep.jumlah_durasi ? statusDurationService.pembuatan_resep.jumlah_durasi : 0}
 
                                             </Text>
                                             <Text style={{
-                                                ...MainStyle.font_arial_14,
-                                                ...MainStyle.color_black,
-                                                fontWeight: '400',
-                                                textAlign: 'center',
-                                                marginTop: 0.0053 * deviceWidth
+                                                ...Styles.dashboard_option_desc_text
                                             }}>
                                                 {statusDurationService.pembuatan_resep.jumlah_pasien ? statusDurationService.pembuatan_resep.jumlah_pasien : 0}
 
@@ -1407,17 +928,9 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                             </View>
                             : <View></View>
                     }
-                </View>
+                </View >
 
-            </ScrollView>
-
-            {/* <Bottom_nav
-                page={1}
-                home={() => { props.navigation.replace("home") }}
-                order={() => { props.navigation.replace("order") }}
-                activity={() => { props.navigation.replace("activity") }}
-                profile={() => { props.navigation.replace("profile") }}
-            /> */}
-        </View>
+            </ScrollView >
+        </View >
     )
 }

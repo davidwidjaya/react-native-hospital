@@ -1,5 +1,6 @@
 import { Dimensions } from "react-native"
 
+
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
@@ -10,10 +11,6 @@ export const MainStyle = {
     font_1: {
         fontFamily: "Arial",
         fontSize: 1
-    },
-    font_arial_24: {
-        fontFamily: "Arial",
-        fontSize: 24
     },
     font_2: {
         fontFamily: "Arial",
@@ -201,51 +198,36 @@ export const MainStyle = {
     font_underline: {
         textDecorationLine: "underline"
     },
-    bg_color_grey_light:{
-        backgroundColor: "#E8E8E8"
-    },
-    bg_color_grey_dark:{
-        backgroundColor: "#BDBDBD"
-    },
-    bgcolor_green:{
-        backgroundColor: "#5DB075"
-    },
-    bgcolor_white:{
-        backgroundColor: "white"
-    },
-    bgcolor_primary_blue:{
+
+    //background_color
+    bgcolor_primary_blue: {
         backgroundColor: "#2E6FDF"
     },
-    bgcolor_primary_blue_light:{
+    bgcolor_primary_blue_light: {
         backgroundColor: "#F4F5FC"
     },
+    bgcolor_white: {
+        backgroundColor: "#EFEFEF"
+    },
 
-    color_grey_light:{
-        color: "#E8E8E8"
-    },
-    color_grey_dark:{
-        color: "#BDBDBD"
-    },
-    color_green:{
-        color: "#5DB075"
-    },
-    color_white:{
-        color: "white"
-    },
-    // color_black:{
-    //     color: "#121212"
-    // }
-    color_black:{
+    //color
+    color_black: {
         color: "#212121"
     },
-    color_blue_light:{
+    color_black_secondary: {
+        color: "#444"
+    },
+    color_blue_light: {
         color: "#F4F5FC"
     },
-    color_grey_new:{
+    color_grey_new: {
         color: "#8C8EA0"
     },
-    color_primary_blue:{
+    color_primary_blue: {
         color: "#2E6FDF"
+    },
+    color_grey_new_light: {
+        color: "#C5C5C5"
     }
 }
 
@@ -260,155 +242,170 @@ export const Styles = {
         height: deviceHeight,
     },
     margin_lr: {
-        marginLeft: 0.055*deviceWidth,
-        marginRight: 0.055*deviceWidth,
+        marginLeft: 0.055 * deviceWidth,
+        marginRight: 0.055 * deviceWidth,
     },
     size_10: {
-        width: 0.027*deviceWidth,
-        height: 0.027*deviceWidth,
+        width: 0.027 * deviceWidth,
+        height: 0.027 * deviceWidth,
     },
     size_16: {
-        width: 0.044*deviceWidth,
-        height: 0.044*deviceWidth,
+        width: 0.044 * deviceWidth,
+        height: 0.044 * deviceWidth,
     },
     size_20: {
-        width: 0.055*deviceWidth,
-        height: 0.055*deviceWidth,
+        width: 0.055 * deviceWidth,
+        height: 0.055 * deviceWidth,
     },
     size_25: {
-        width: 0.0694*deviceWidth,
-        height: 0.0694*deviceWidth,
+        width: 0.0694 * deviceWidth,
+        height: 0.0694 * deviceWidth,
     },
     size_30: {
-        width: 0.083*deviceWidth,
-        height: 0.083*deviceWidth,
+        width: 0.083 * deviceWidth,
+        height: 0.083 * deviceWidth,
     },
     size_40: {
-        width: 0.11*deviceWidth,
-        height: 0.11*deviceWidth,
+        width: 0.11 * deviceWidth,
+        height: 0.11 * deviceWidth,
     },
     size_120: {
-        width: 0.33*deviceWidth,
-        height: 0.33*deviceWidth,
+        width: 0.33 * deviceWidth,
+        height: 0.33 * deviceWidth,
     },
     size_120_60: {
-        width: 0.33*deviceWidth,
-        height: 0.166*deviceWidth,
+        width: 0.33 * deviceWidth,
+        height: 0.166 * deviceWidth,
     },
     size_vendor: {
         width: deviceWidth,
-        height: 0.405*deviceWidth,
+        height: 0.405 * deviceWidth,
     },
 
+
+    // #components
     //textbox
-    textbox:{
-        height: 0.1*deviceWidth,
-        // width:0.91*deviceWidth,
-        // width: deviceWidth,
-        marginVertical: 0.01*deviceWidth,
-        padding: 0.03*deviceWidth,
-        // borderWidth: 1,
-        // borderColor:MainStyle.color_grey_dark.color,
-        borderRadius:12,
+    textbox: {
+        height: 0.1 * deviceWidth,
+        marginVertical: 0.01 * deviceWidth,
+        padding: 0.03 * deviceWidth,
+        borderRadius: 12,
         ...MainStyle.color_black,
-        backgroundColor:MainStyle.color_blue_light.color,
+        backgroundColor: MainStyle.color_blue_light.color,
         ...MainStyle.font_14
     },
 
-    //dropdown
-    dropdown:{
-        height: 0.11*deviceWidth,
-        width:0.91*deviceWidth,
-        marginVertical: 0.01*deviceWidth,
-        padding: 0.03*deviceWidth,
-        borderWidth: 1,
-        borderColor:MainStyle.color_grey_dark.color,
-        borderRadius:8,
-        backgroundColor:MainStyle.color_grey_light.color,
-        ...MainStyle.font_14
+
+    //login_image
+    login_main_image: {
+        flexDirection: 'column-reverse',
+        width: deviceWidth,
+        height: 0.75466 * deviceWidth,
     },
-    dropdown_container:{
-        width:0.91*deviceWidth,
-        marginVertical: 0.01*deviceWidth,
-        padding: 0.03*deviceWidth,
-        borderWidth: 1,
-        borderColor:MainStyle.color_grey_dark.color,
-        borderRadius:8,
-        backgroundColor:MainStyle.color_grey_light.color,
-        ...MainStyle.font_14
+
+
+    //dashboard_title
+    dashboard_header_title: {
+        ...MainStyle.font_24,
+        ...MainStyle.color_black,
+        fontWeight: '700',
+        width: deviceWidth,
+        marginLeft: 0.064 * deviceWidth,
+        marginTop: 0.0373 * deviceWidth
     },
+    dashboard_subheader_title: {
+        ...MainStyle.font_16,
+        ...MainStyle.color_black,
+        fontWeight: '700',
+        width: deviceWidth,
+        marginLeft: 0.064 * deviceWidth,
+        marginTop: 0.0373 * deviceWidth
+    },
+
+
+    //dashboard_item
+    dashboard_item_wrapper: {
+        width: 0.408 * deviceWidth,
+        height: 0.2773 * deviceWidth,
+        ...MainStyle.bgcolor_primary_blue_light,
+        borderRadius: 13,
+        paddingHorizontal: 0.032 * deviceWidth,
+        paddingVertical: 0.0426 * deviceWidth,
+        marginRight: 0.0426 * deviceWidth,
+    },
+    dashboard_itemcount_text: {
+        ...MainStyle.font_24,
+        ...MainStyle.color_black,
+        fontWeight: '700',
+        textAlign: 'center'
+    },
+    dashboard_item_desc_text: {
+        ...MainStyle.font_14,
+        ...MainStyle.color_black,
+        fontWeight: '400',
+        textAlign: 'center',
+        marginTop: 0.0053 * deviceWidth
+    },
+    dashboard_item_date_text: {
+        ...MainStyle.font_12,
+        ...MainStyle.color_grey_new,
+        fontWeight: '400',
+        textAlign: 'center',
+        marginTop: 0.016 * deviceWidth,
+    },
+
+    dashboard_duration_wrapper_text: {
+        width: 0.872 * deviceWidth,
+        height: 0.416 * deviceWidth,
+        ...MainStyle.bgcolor_primary_blue_light,
+        borderRadius: 13,
+        paddingHorizontal: 0.032 * deviceWidth,
+        paddingVertical: 0.0426 * deviceWidth,
+        marginRight: 0.0426 * deviceWidth,
+        marginLeft: 0.064 * deviceWidth,
+        marginBottom: 0.0426 * deviceWidth,
+    },
+
+    dashboard_duration_average_text: {
+        ...MainStyle.font_24,
+        ...MainStyle.color_black,
+        fontWeight: '700',
+        textAlign: 'center'
+    },
+
+    dashboard_duration_desc_text: {
+        ...MainStyle.font_14,
+        ...MainStyle.color_black,
+        fontWeight: '400',
+        textAlign: 'center',
+        marginTop: 0.0053 * deviceWidth
+    },
+    dashboard_option_desc_text: {
+        ...MainStyle.font_14,
+        ...MainStyle.color_black,
+        fontWeight: '400',
+        textAlign: 'center',
+        marginTop: 0.0053 * deviceWidth
+    },
+
+
 
     //buttonbig
-    button_big_view:{
-        width:0.91*deviceWidth,
-        height:0.1*deviceWidth,
-        marginLeft: 0.055*deviceWidth,
-        marginRight: 0.055*deviceWidth,
-        justifyContent:'center',
-        borderRadius:12,
+    button_big_view: {
+        width: 0.91 * deviceWidth,
+        height: 0.1 * deviceWidth,
+        marginLeft: 0.055 * deviceWidth,
+        marginRight: 0.055 * deviceWidth,
+        justifyContent: 'center',
+        borderRadius: 12,
     },
-    button_text:{
+    button_text: {
         ...MainStyle.font_14,
         fontWeight: "700"
         // fontFamily: 'Cabin-Bold'
     },
-    label_general:{
+    label_general: {
         ...MainStyle.font_16,
     },
 
-
-    //bottomnav
-    navmenu_view: {
-        ...MainStyle.bgcolor_white,
-        width: deviceWidth,
-        height: 0.155*deviceWidth,
-        paddingLeft: 0.066*deviceWidth,
-        paddingRight: 0.066*deviceWidth,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    navmenu_button: {
-        alignItems: "center",
-        flexDirection: "column",
-    },
-    navmenu_text_active: {
-        ...MainStyle.font_12,
-        ...MainStyle.color_black,
-        marginTop: 0.013*deviceWidth,
-    },
-    navmenu_text_inactive: {
-        ...MainStyle.font_12,
-        ...MainStyle.color_grey_dark,
-        marginTop: 0.013*deviceWidth,
-        opacity: 0.4,
-    },
-
-    //searchbox
-    searchbox:{
-        height: 0.1*deviceWidth,
-        width:0.91*deviceWidth,
-        marginVertical: 0.01*deviceWidth,
-        padding: 0.03*deviceWidth,
-        borderWidth: 1,
-        borderColor:MainStyle.color_grey_dark.color,
-        borderRadius:8,
-        backgroundColor:MainStyle.color_grey_light.color,
-        ...MainStyle.font_14,
-        position:'relative'
-
-    },
-
-    searchbox_icon:{
-        ...MainStyle.bgcolor_green,
-        position: 'absolute',
-        height: 0.1 * deviceWidth,
-        width: 0.11 * deviceWidth,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderBottomRightRadius: 8,
-        borderTopEndRadius: 8,
-        right: 0,
-        marginVertical: 0.01 * deviceWidth,
-    }
 }

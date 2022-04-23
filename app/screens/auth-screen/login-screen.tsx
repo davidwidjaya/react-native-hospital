@@ -40,16 +40,12 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
         else if (password == "") {
             ToastAndroid.show("Password can't be empty.", ToastAndroid.LONG);
         }
-        // else if(email == "admin" && password == "admin"){
-        //   props.navigation.replace("admin");
-        // }
         else {
             let formData = new FormData();
             console.log('call api...');
             formData.append("username", username);
             formData.append("password", password);
             formData.append("code", selectedFask);
-            // formData.append("code", 'devmercury123');
 
             console.log('formdata', formData);
 
@@ -83,10 +79,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
     const listFaskes = async () => {
         setSpinner(true);
         let formData = new FormData();
-        console.log('call api fakses...');
-        // formData.append("consumer_id", "reactnativ");
-        // formData.append("consumer_secret", "1234qwer%232");
-        // formData.append("nama_consumer", "mobileapp");
+        console.log('call api listFaskes');
 
         console.log('formdata', formData);
 
@@ -94,7 +87,6 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
         console.log('apiListFaskes', result);
         if (result.kind == "ok") {
             console.log('apiListFaskes', result.data);
-            // setListFask(result.data);
             setListFask([{ "title": "devmercury123", "name": "DEV 4 RS MERCURY", "prefix": "dev_mercury" }, { "title": "Png5ud6DRf", "name": "DEV 4 RS VENUS", "prefix": "dev_venus" }]);
         }
         else if (result.kind == 'wrong') {
@@ -126,9 +118,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Image
                     style={{
-                        flexDirection: 'column-reverse',
-                        width: deviceWidth,
-                        height: 0.75466 * deviceWidth,
+                        ...MainStyle.login_main_image
                     }}
                     source={Images.login_img}
                 />
@@ -136,10 +126,8 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
                 <View style={{
                     flexDirection: 'column',
-                    // backgroundColor: 'blue',
                     width: deviceWidth
                 }}>
-                    {/* <View style={{ height: 0.02 * deviceWidth }} /> */}
 
                     <Text style={{
                         ...MainStyle.font_arial_24,
@@ -194,22 +182,22 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                         }}
                         renderDropdownIcon={isOpened => {
                             return <FontAwesomeIcon
-                                style={{ ...Styles.size_20, color: '#444' }}
+                                style={{ ...Styles.size_20, ...MainStyle.color_black_secondary }}
                                 icon={isOpened ? faChevronUp : faChevronDown} />
                         }}
                         dropdownIconPosition={'right'}
                         dropdownStyle={{
-                            backgroundColor: '#EFEFEF',
+                            ...MainStyle.bgcolor_white,
                             borderRadius: 12
                         }}
                         rowStyle={{
-                            backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'
+                            ...MainStyle.bgcolor_white,
+                            borderBottomColor: MainStyle.color_grey_new_light.color
                         }}
-                        rowTextStyle={{ color: '#444', textAlign: 'left' }}
+                        rowTextStyle={{ ...MainStyle.color_black_secondary, textAlign: 'left' }}
                     />
 
                     <Textbox
-                        // width={deviceWidth}
                         title={"Username atau Email"}
                         value={username}
                         editable={true}
@@ -227,56 +215,6 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                         hidden={true}
                         change={values => setPassword(values)}
                     />
-
-                    {/* <View style={{
-                        flexDirection: "row",
-                        // backgroundColor: 'yellow',
-                        marginLeft: 0.064 * deviceWidth,
-                        marginRight: 0.064 * deviceWidth,
-                        justifyContent: "space-between"
-                    }}>
-                        <View style={{
-                            flexDirection: "row",
-                            width: 0.2426 * deviceWidth,
-                            // backgroundColor:'white'
-                        }}>
-                            <CheckBox
-                                disabled={false}
-                                value={remember}
-                                onValueChange={(newValue) => setRemember(newValue)}
-                                tintColors={{ true: 'black' }, { false: 'black' }}
-                                style={{
-                                    alignSelf: "center",
-                                    borderWidth: 2,
-                                    // backgroundColor:"red"
-                                }}
-                            />
-                            <Text style={{
-                                ...MainStyle.font_arial_14,
-                                ...MainStyle.color_black,
-                                fontWeight: '400',
-                                width: deviceWidth,
-                                alignSelf: "center"
-                            }}>Ingat Saya</Text>
-                        </View>
-
-
-                        <TouchableOpacity style={{
-                            width: 0.565 * deviceWidth,
-                            // backgroundColor:'blue',
-                            justifyContent: 'center',
-
-                        }}>
-                            <Text
-                                style={{
-                                    ...MainStyle.font_arial_14,
-                                    ...MainStyle.color_black,
-                                    fontWeight: '400',
-                                    textAlign: 'right',
-                                }}>Lupa Password?</Text>
-
-                        </TouchableOpacity>
-                    </View> */}
 
                     <View style={{ height: 0.096 * deviceWidth }} />
                     <Button_big
