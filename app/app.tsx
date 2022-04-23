@@ -89,6 +89,7 @@ import { useBackButtonHandler } from "./navigation/use-back-button-handler"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models/root-store"
 import * as storage from "./utils/storage"
 import getActiveRouteName from "./navigation/get-active-routename"
+import { Sidebar } from "./components"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -188,7 +189,9 @@ const App: React.FunctionComponent<{}> = () => {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
+      
       <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
+
         <RootNavigator
           ref={navigationRef}
           initialState={initialNavigationState}

@@ -20,15 +20,15 @@ export function Textbox(props: HeaderProps) {
 
   return (
     <View style={{
-      marginLeft: 0.064*deviceWidth,
-      marginRight: 0.064*deviceWidth,
-      marginTop: 0.042*deviceWidth,
+      marginLeft: 0.064 * deviceWidth,
+      marginRight: 0.064 * deviceWidth,
+      marginTop: 0.042 * deviceWidth,
       // width: deviceWidth,
       // width: 0.872 * deviceWidth,
       flexDirection: "column",
       // backgroundColor: 'red'
     }}>
-      <Text>{props.title}</Text>
+      {/* <Text style={{ ...MainStyle.color_black }} >{props.title}</Text> */}
       <TextInput
         style={Styles.textbox}
         value={props.value}

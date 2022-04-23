@@ -25,11 +25,11 @@ export function PrimaryNavigator() {
     >
       {/* <Stack.Screen name="welcome" component={WelcomeScreen} /> */}
       <Stack.Screen name="login" component={LoginScreen} />
-      <Stack.Screen name="home" component={HomeScreen} />
-      <Stack.Screen name="bootstrap" component={BootstrapScreen} />
-      <Stack.Screen name="activity" component={ActivityScreen} />
-      <Stack.Screen name="profile" component={ProfileScreen} />
-      <Stack.Screen name="order" component={OrderScreen} />
+      {/* <Stack.Screen name="home" component={HomeScreen} /> */}
+      {/* <Stack.Screen name="bootstrap" component={BootstrapScreen} /> */}
+      {/* <Stack.Screen name="activity" component={ActivityScreen} /> */}
+      {/* <Stack.Screen name="profile" component={ProfileScreen} /> */}
+      {/* <Stack.Screen name="order" component={OrderScreen} /> */}
     </Stack.Navigator>
   )
 }

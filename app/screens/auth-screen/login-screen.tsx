@@ -63,7 +63,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
                 await AsyncStorage.setItem('bearer_token', token);
 
-                props.navigation.replace("home");
+                props.navigation.replace("primaryDrawer", { screen: 'home' });
             }
             else if (result.kind == 'wrong') {
                 setSpinner(false);
@@ -170,13 +170,14 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                             console.log(selectedItem, index);
                             setSelectedFask(selectedItem.title);
                         }}
-                        defaultButtonText={'Select country'}
+                        defaultButtonText={'Select code'}
                         buttonTextAfterSelection={(selectedItem, index) => {
                             return selectedItem.title;
                         }}
                         rowTextForSelection={(item, index) => {
                             return item.title;
                         }}
+
                         buttonStyle={{
                             width: 0.872 * deviceWidth,
                             marginLeft: 0.064 * deviceWidth,
@@ -198,7 +199,8 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                         }}
                         dropdownIconPosition={'right'}
                         dropdownStyle={{
-                            backgroundColor: '#EFEFEF'
+                            backgroundColor: '#EFEFEF',
+                            borderRadius: 12
                         }}
                         rowStyle={{
                             backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'
@@ -226,7 +228,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                         change={values => setPassword(values)}
                     />
 
-                    <View style={{
+                    {/* <View style={{
                         flexDirection: "row",
                         // backgroundColor: 'yellow',
                         marginLeft: 0.064 * deviceWidth,
@@ -242,8 +244,11 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                                 disabled={false}
                                 value={remember}
                                 onValueChange={(newValue) => setRemember(newValue)}
+                                tintColors={{ true: 'black' }, { false: 'black' }}
                                 style={{
                                     alignSelf: "center",
+                                    borderWidth: 2,
+                                    // backgroundColor:"red"
                                 }}
                             />
                             <Text style={{
@@ -271,7 +276,7 @@ export const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                                 }}>Lupa Password?</Text>
 
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     <View style={{ height: 0.096 * deviceWidth }} />
                     <Button_big

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ParamListBase, useIsFocused } from "@react-navigation/native"
+import { DrawerActions, ParamListBase, useIsFocused } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "react-native-screens/native-stack"
 import { useStores } from "@models/root-store"
 import Spinner from 'react-native-loading-spinner-overlay';
 import { MainStyle, Styles, Images, Helper } from "@theme"
 import '../../../global.js'
-import { Textbox, Button_big, Bottom_nav, Searchbox, Menuitem } from "@components"
-import { Dimensions, View, Text, ToastAndroid, ScrollView, AsyncStorage, Alert, Image, TextInput, TouchableOpacity } from "react-native"
+import { Sidebar, Textbox, Button_big, Bottom_nav, Searchbox, Menuitem } from "@components"
+import { Dimensions, View, Text, ToastAndroid, ScrollView, AsyncStorage, Alert, Image, TextInput, TouchableOpacity, RefreshControl } from "react-native"
 import { values } from 'mobx';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { async } from 'validate.js';
+
 
 const deviceWidth = Dimensions.get("window").width;
 
@@ -28,6 +30,17 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     const [visitMonth, setVisitMonth] = useState([]);
     const [summaryRegistration, setSummaryRegistration] = useState([]);
     const [statusDurationService, setStatusDurationService] = useState(null);
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const toogle = props.navigation.dispatch(DrawerActions.openDrawer());
+
+    const open = () => {
+        console.log('clicked opendraw...');
+        const drawerNavigation = props.navigation.getParent("RootDrawer");
+        console.log(drawerNavigation);
+        drawerNavigation?.openDrawer();
+    }
 
     const getDashboard = async () => {
         setSpinner(true);
@@ -91,7 +104,14 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 visible={spinner}
             />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={getDashboard}
+                    />
+                }
+            >
 
                 <View style={{
                     // backgroundColor: 'red',
@@ -100,10 +120,11 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                     alignItems: "flex-end",
                     width: deviceWidth,
                     justifyContent: 'flex-end',
-                    paddingRight: 0.0746*deviceWidth
+                    paddingRight: 0.0746 * deviceWidth
                 }}>
                     <TouchableOpacity
-                        onPress={() => props.navigation.replace('login')}
+                        onPress={() => open()}
+                        // onPress={() => props.navigation.replace('login')}
                         style={{
                             width: 0.0826 * deviceWidth,
                             height: 0.0966 * deviceWidth,

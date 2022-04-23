@@ -54,7 +54,7 @@ export const RootStoreModel = types.model("RootStore").props({
     },
     async dashboard(content) {
       var res = await ApiInstance.dashboard(content);
-      console.log('result apistore-dashboard: ',res);
+      console.log('result apistore-dashboard: ', res);
       if (res.kind == "ok") {
       }
       else if (res.kind == 'wrong') {
@@ -67,7 +67,7 @@ export const RootStoreModel = types.model("RootStore").props({
     },
     async listFaskes(content) {
       var res = await ApiInstance.listFaskes(content);
-      console.log('result apistore-listFaskes: ',res);
+      console.log('result apistore-listFaskes: ', res);
       if (res.kind == "ok") {
       }
       else if (res.kind == 'wrong') {
@@ -78,6 +78,19 @@ export const RootStoreModel = types.model("RootStore").props({
       }
       return res;
     },
+    async getNavbar(content) {
+      var res = await ApiInstance.getNavbar(content);
+      console.log('result apistore-getNavbar: ', res);
+      if (res.kind == "ok") {
+      }
+      else if (res.kind == 'wrong') {
+        console.log(res.message);
+      }
+      else {
+        actionError(res, self);
+      }
+      return res;
+    }
   }))
 
 /**

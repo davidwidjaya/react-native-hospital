@@ -1,5 +1,6 @@
 export type RootParamList = {
   primaryStack: undefined
+  primaryDrawer: undefined
 }
 
 export type PrimaryParamList = {

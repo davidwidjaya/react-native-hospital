@@ -8,8 +8,15 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen } from "../screens"
+import { WelcomeScreen, DemoScreen, DemoListScreen, HomeScreen, LoginScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
+import { Sidebar } from "../components"
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -27,12 +34,14 @@ export type NavigatorParamList = {
   welcome: undefined
   demo: undefined
   demoList: undefined
+  login: undefined
+  home: undefined
   // 🔥 Your screens go here
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<NavigatorParamList>()
-
+const Drawer = createDrawerNavigator<NavigatorParamList>();
 const AppStack = () => {
   return (
     <Stack.Navigator
@@ -49,7 +58,38 @@ const AppStack = () => {
   )
 }
 
-interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Close drawer"
+        onPress={() => props.navigation.closeDrawer()}
+      />
+      <DrawerItem
+        label="Toggle drawer"
+        onPress={() => props.navigation.toggleDrawer()}
+      />
+    </DrawerContentScrollView>
+  );
+}
+
+const AppDrawer = () => {
+  return (
+    <Drawer.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+      useLegacyImplementation
+      drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="login" component={HomeScreen} />
+      <Drawer.Screen name="home" component={LoginScreen} />
+    </Drawer.Navigator>
+  )
+}
+
+interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
 
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme()
@@ -60,7 +100,8 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      <AppStack />
+      {/* <AppStack /> */}
+      <AppDrawer />
     </NavigationContainer>
   )
 }
